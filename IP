@@ -1,0 +1,82 @@
+void setup() { 
+  ///wwww.beginnertopro.in////
+  //left sensor output to arduno input 
+  pinMode(10,INPUT); 
+  //Right Sensor output to arduino input 
+  pinMode(12,INPUT); 
+  //Remote control L output to arduino input
+  pinMode(7,INPUT);
+  //Remote control R output to arduino input
+  pinMode(8,INPUT);
+  //output from audrino to motor drive 
+  //Right motor audrino to motor Drive 
+  pinMode(3,OUTPUT); 
+  pinMode(5,OUTPUT); 
+  //left Motor Arduino motor Drive 
+  pinMode(6,OUTPUT); 
+  pinMode(9,OUTPUT); 
+} 
+void goRight(){
+  analogWrite(3,HIGH);
+  analogWrite(5,LOW);
+  analogWrite(6,HIGH);
+  analogWrite(9,LOW);
+}
+ 
+void goLeft(){
+  analogWrite(3,HIGH);
+  analogWrite(5,LOW);
+  analogWrite(6,LOW);
+  analogWrite(9,HIGH);
+}
+ 
+void stopBot(){
+  analogWrite(3,LOW);
+  analogWrite(5,LOW);
+  analogWrite(6,LOW);
+  analogWrite(9,LOW);
+}
+
+  void loop() { 
+    //left sensor input 
+    int l1=digitalRead(10); 
+    //Right Sensor Input 
+    int r1=digitalRead(12); 
+    if((l1==HIGH)&&(r1==HIGH)) {
+       //Stay still
+      digitalWrite(3,HIGH); 
+      digitalWrite(5,LOW); 
+      digitalWrite(6,HIGH); 
+      digitalWrite(9,LOW); 
+    } else if((l1==LOW)&&(r1==HIGH)) {
+        //turns right 
+        digitalWrite(3,HIGH); 
+        digitalWrite(5,LOW); 
+        digitalWrite(6,LOW); 
+        digitalWrite(9,HIGH); 
+    } else if((l1==HIGH)&&(r1==LOW)) {
+          //turns left 
+          digitalWrite(3,LOW); 
+          digitalWrite(5,HIGH); 
+          digitalWrite(6,HIGH); 
+          digitalWrite(9,LOW); 
+    }
+    //left RC input
+    int RCl1=digitalRead(7); 
+    //Right Sensor Input 
+    int RCr1=digitalRead(8); 
+    if((RCl1==LOW)&&(RCr1==HIGH)) {
+        //turns right
+        digitalWrite(3,LOW); 
+        digitalWrite(5,LOW); 
+        digitalWrite(6,LOW); 
+        digitalWrite(9,HIGH); 
+    } else if((RCl1==HIGH)&&(RCr1==LOW)) {
+          //turns left 
+          digitalWrite(3,LOW); 
+          digitalWrite(5,HIGH); 
+          digitalWrite(6,LOW); 
+          digitalWrite(9,LOW);
+          
+    }
+ }
